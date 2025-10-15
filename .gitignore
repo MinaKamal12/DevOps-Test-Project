@@ -10,7 +10,7 @@ env/
 
 # Docker
 .dockerignore
-
+.github/keys
 # IDE
 .vscode/
 .idea/
@@ -18,3 +18,4 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+
