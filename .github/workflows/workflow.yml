@@ -26,7 +26,7 @@ jobs:
 
     - name: Run test
       run: |
-        pytest test/ -v  # Adjust if tests are in a different folder
+        pthon -m pytest test/ -v  # Adjust if tests are in a different folder
 
   build-and-deploy:
     needs: test  # Only if tests pass
