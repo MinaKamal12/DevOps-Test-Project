@@ -1,10 +1,10 @@
 # Build stage
 FROM python:3.11-slim AS builder
 
-WORKDIR /app
+WORKDIR src/app
 
 # Copy requirements and install deps
-COPY ./requirements.txt .
+COPY src/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Runtime stage
@@ -17,7 +17,7 @@ COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/pytho
 COPY --from=builder /usr/local/bin /usr/local/bin
 
 # Copy app source
-COPY ..
+COPY src/ ./src/
 
 # Expose port
 EXPOSE 5000
