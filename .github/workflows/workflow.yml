@@ -26,6 +26,7 @@ jobs:
 
     - name: Run test
       run: |
+        export PYTHONPATH=$PYTHONPATH:$(pwd)
         pytest test/ -v  # Adjust if tests are in a different folder
 
   build-and-deploy:
