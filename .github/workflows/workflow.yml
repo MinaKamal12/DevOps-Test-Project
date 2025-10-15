@@ -22,11 +22,10 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-        pip install pytest
 
     - name: Run test
       run: |
-        pthon -m pytest test/ -v  # Adjust if tests are in a different folder
+        pytest test/ -v  # Adjust if tests are in a different folder
 
   build-and-deploy:
     needs: test  # Only if tests pass
