@@ -59,7 +59,7 @@ jobs:
         host: ${{ secrets.AWS_EC2_HOST }}
         username: ubuntu
         key: ${{ secrets.AWS_EC2_SSH_KEY }}
-        port: 22
+        port: 80
 
         script: |
           docker pull minakmorgan/devops-test-project:latest
