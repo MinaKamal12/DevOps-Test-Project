@@ -39,12 +39,17 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
-
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Test SSH Connection
+      run: |
+      echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+      chmod 600 key.pem
+      ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo Connected!"
+
 
     - name: Build and Push Docker image
       uses: docker/build-push-action@v4
@@ -52,6 +57,12 @@ jobs:
         context: .
         push: true
         tags: minakmorgan/devops-test-project:latest  # Replace with your Docker Hub username
+
+    - name: Test SSH Connection
+      run: |
+        echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+        chmod 600 key.pem
+        ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo Connected!"
 
     - name: Deploy to AWS EC2
       uses: appleboy/ssh-action@v0.1.5
