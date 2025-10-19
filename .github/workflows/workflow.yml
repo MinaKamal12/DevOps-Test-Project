@@ -57,8 +57,10 @@ jobs:
       uses: appleboy/ssh-action@v0.1.5
       with:
         host: ${{ secrets.AWS_EC2_HOST }}
-        username: ${{ secrets.AWS_EC2_USERNAME }}
+        username: ubuntu
         key: ${{ secrets.AWS_EC2_SSH_KEY }}
+        port: 22
+
         script: |
           docker pull minakmorgan/devops-test-project:latest
           docker stop flask-container || true
