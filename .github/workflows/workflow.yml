@@ -52,12 +52,6 @@ jobs:
         context: .
         push: true
         tags: minakmorgan/devops-test-project:latest  # Replace with your Docker Hub username
-    - name: Test SSH Connection
-      run: |
-        echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
-        chmod 600 key.pem
-        ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo Connected!"
-
 
     - name: Deploy to AWS EC2
       uses: appleboy/ssh-action@v0.1.5
