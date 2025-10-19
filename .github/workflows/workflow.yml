@@ -45,13 +45,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Debug EC2_HOST
-      run: |
-        echo "EC2_HOST length: ${#EC2_HOST}"
-        echo "EC2_HOST (masked): ${{ secrets.AWS_EC2_HOST }}"
-      env:
-        EC2_HOST: ${{ secrets.AWS_EC2_HOST }}
-
+ 
 
     - name: Build and Push Docker image
       uses: docker/build-push-action@v4
@@ -60,15 +54,6 @@ jobs:
         push: true
         tags: minakmorgan/devops-test-project:latest  # Replace with your Docker Hub username
 
-    - name: Test SSH Connection
-      env:        
-        host: ${{ secrets.AWS_EC2_HOST }}
-        username: ubuntu
-        key: ${{ secrets.AWS_EC2_SSH_KEY }}
-      run: |
-          echo "${{ secrets.AWS_EC2_SSH_KEY }}" > github_actions_rsa
-          chmod 600 github_actions_rsa
-          ssh -i github_actions_rsa -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} "echo Connected!"
 
     - name: Deploy to AWS EC2
       uses: appleboy/ssh-action@v0.1.5
