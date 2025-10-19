@@ -31,7 +31,7 @@ jobs:
         pytest test/ -v  # Adjust if tests are in a different folder
 
   build-and-deploy:
-    needs: test  # Only if tests pass
+    needs: test # Only if tests pass
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'  # Only on main branch pushes
     steps:
