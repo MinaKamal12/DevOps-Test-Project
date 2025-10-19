@@ -46,9 +46,9 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Test SSH Connection
       run: |
-      echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
-      chmod 600 key.pem
-      ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo Connected!"
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 600 key.pem
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "echo Connected!"
 
 
     - name: Build and Push Docker image
