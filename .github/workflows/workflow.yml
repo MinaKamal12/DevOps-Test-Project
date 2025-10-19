@@ -25,10 +25,10 @@ jobs:
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
         python -m pip install pytest
 
-    - name: Run tests
+    - name: Run test
       run: |
         export PYTHONPATH=$PYTHONPATH:$(pwd)
-        pytest tests/ -v  # Adjust if tests are in a different folder
+        pytest test/ -v  # Adjust if tests are in a different folder
 
   build-and-deploy:
     needs: test  # Only if tests pass
